@@ -95,3 +95,16 @@ resource "aws_subnet" "gwlb_subnets" {
   }
 }
 
+# Gateway load balancer
+resource "aws_lb" "gwlb" {
+  name               = "${var.security_vpc.name}-vpc-gwlb"
+  load_balancer_type = "gateway"
+
+  subnet_mapping {
+    subnet_id     = local.gwlb_subnet_ids[0]
+  }
+
+  subnet_mapping {
+    subnet_id     = local.gwlb_subnet_ids[1]
+  }
+}
