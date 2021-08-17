@@ -1,3 +1,5 @@
+region  = "us-east-2"
+
 env = "dev"
 
 security_vpc = {

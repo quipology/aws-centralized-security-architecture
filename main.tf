@@ -108,3 +108,25 @@ resource "aws_lb" "gwlb" {
     subnet_id     = local.gwlb_subnet_ids[1]
   }
 }
+
+# data "aws_caller_identity" "current" {}
+
+resource "aws_vpc_endpoint_service" "gwlb" {
+  acceptance_required        = false
+  # allowed_principals         = [data.aws_caller_identity.current.arn]
+  gateway_load_balancer_arns = [aws_lb.gwlb.arn]
+}
+
+resource "aws_vpc_endpoint" "gwlb1" {
+  service_name      = aws_vpc_endpoint_service.gwlb.service_name
+  subnet_ids        = [aws_subnet.gwlb_subnets["gwlb_az1"].id]
+  vpc_endpoint_type = aws_vpc_endpoint_service.gwlb.service_type
+  vpc_id            = module.vpc.vpc_id
+}
+
+resource "aws_vpc_endpoint" "gwlb2" {
+  service_name      = aws_vpc_endpoint_service.gwlb.service_name
+  subnet_ids        = [aws_subnet.gwlb_subnets["gwlb_az2"].id]
+  vpc_endpoint_type = aws_vpc_endpoint_service.gwlb.service_type
+  vpc_id            = module.vpc.vpc_id
+}
