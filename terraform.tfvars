@@ -17,20 +17,24 @@ tgw_subnets = {
   tgw_az1 = {
     name = "tgw-private-us-east-2a"
     cidr = "10.42.6.0/28"
+    az = "us-east-2a"
   },
   tgw_az2 = {
     name = "tgw-private-us-east-2b"
     cidr = "10.42.6.16/28"
+    az = "us-east-2b"
   }
 }
 
 gwlb_subnets = {
   gwlb_az1 = {
-    name = "gwlb-private-us-east-2a"
+    name = "gwlb-az1"
     cidr = "10.42.6.32/28"
+    az = "us-east-2a"
   },
   gwlb_az2 = {
-    name = "gwlb-private-us-east-2b"
+    name = "gwlb-az2"
     cidr = "10.42.6.48/28"
+    az = "us-east-2b"
   }
 }

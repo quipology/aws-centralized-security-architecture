@@ -54,7 +54,7 @@ resource "aws_instance" "fgtvm2" {
   }
 
   tags = {
-    Name = "FortiGateVM-2"
+    Name = "fortigate-2"
   }
 }
 

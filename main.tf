@@ -40,6 +40,7 @@ resource "aws_subnet" "tgw_subnets" {
   for_each   = var.tgw_subnets
   vpc_id     = module.vpc.vpc_id
   cidr_block = each.value.cidr
+  availability_zone = each.value.az
   tags = {
     Name = each.value.name
   }
@@ -90,6 +91,7 @@ resource "aws_subnet" "gwlb_subnets" {
   for_each   = var.gwlb_subnets
   vpc_id     = module.vpc.vpc_id
   cidr_block = each.value.cidr
+  availability_zone = each.value.az
   tags = {
     Name = each.value.name
   }
@@ -129,4 +131,27 @@ resource "aws_vpc_endpoint" "gwlb2" {
   subnet_ids        = [aws_subnet.gwlb_subnets["gwlb_az2"].id]
   vpc_endpoint_type = aws_vpc_endpoint_service.gwlb.service_type
   vpc_id            = module.vpc.vpc_id
+}
+
+resource "aws_lb_target_group" "fortigates" {
+  name     = "fortigate-tg"
+  port     = 6081
+  protocol = "GENEVE"
+  target_type = "ip"
+  vpc_id   = module.vpc.vpc_id
+
+  health_check {
+    port     = 8443
+    protocol = "HTTPS"
+  }
+}
+
+resource "aws_lb_target_group_attachment" "fgtvm1" {
+  target_group_arn = aws_lb_target_group.fortigates.arn
+  target_id        = aws_network_interface.fg1_eth1.private_ip
+}
+
+resource "aws_lb_target_group_attachment" "fgtvm2" {
+  target_group_arn = aws_lb_target_group.fortigates.arn
+  target_id        = aws_network_interface.fg2_eth1.private_ip
 }
