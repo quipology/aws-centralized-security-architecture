@@ -164,30 +164,3 @@ resource "aws_eip" "FGT2PublicIP" {
   network_interface = aws_network_interface.fg2_eth0.id
 }
 
-
-# resource "aws_route_table_association" "publicassociate1" {
-#   subnet_id      = module.vpc.public_subnets[0]
-#   route_table_id = aws_route_table.fgtvmpublicrt.id
-# }
-
-# resource "aws_route_table_association" "internalassociate1" {
-#   subnet_id      = module.vpc.private_subnets[0]
-#   route_table_id = aws_route_table.fgtvmprivatert.id
-# }
-
-# resource "aws_eip" "FGT1PublicIP" {
-#   depends_on        = [aws_instance.fgtvm1]
-#   vpc               = true
-#   network_interface = aws_network_interface.fg1_eth0.id
-# }
-
-# resource "aws_route_table_association" "publicassociate2" {
-#   subnet_id      = module.vpc.public_subnets[1]
-#   route_table_id = aws_route_table.fgtvmpublicrt.id
-# }
-
-# resource "aws_route_table_association" "internalassociate2" {
-#   subnet_id      = module.vpc.private_subnets[1]
-#   route_table_id = aws_route_table.fgtvmprivatert.id
-# }
-

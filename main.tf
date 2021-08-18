@@ -79,11 +79,11 @@ resource "aws_ec2_transit_gateway_route_table_association" "security_vpc_assoc" 
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_security_rt.id
 }
 
-# Transit gateway security VPC spoke table propagation
-resource "aws_ec2_transit_gateway_route_table_propagation" "security_vpc_prop" {
-  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.security_vpc_att.id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_spoke_rt.id
-}
+# # Transit gateway security VPC spoke table propagation
+# resource "aws_ec2_transit_gateway_route_table_propagation" "security_vpc_prop" {
+#   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.security_vpc_att.id
+#   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.tgw_spoke_rt.id
+# }
 
 # Gateway load balancer subnets
 resource "aws_subnet" "gwlb_subnets" {
