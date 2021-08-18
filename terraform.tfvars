@@ -15,12 +15,12 @@ security_vpc = {
 
 tgw_subnets = {
   tgw_az1 = {
-    name = "tgw-private-us-east-2a"
+    name = "tgw-az1"
     cidr = "10.42.6.0/28"
     az = "us-east-2a"
   },
   tgw_az2 = {
-    name = "tgw-private-us-east-2b"
+    name = "tgw-az2"
     cidr = "10.42.6.16/28"
     az = "us-east-2b"
   }
