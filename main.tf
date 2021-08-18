@@ -146,6 +146,15 @@ resource "aws_lb_target_group" "fortigates" {
   }
 }
 
+resource "aws_lb_listener" "gwlb" {
+  load_balancer_arn = aws_lb.gwlb.id
+
+  default_action {
+    target_group_arn = aws_lb_target_group.fortigates.id
+    type             = "forward"
+  }
+}
+
 resource "aws_lb_target_group_attachment" "fgtvm1" {
   target_group_arn = aws_lb_target_group.fortigates.arn
   target_id        = aws_network_interface.fg1_eth1.private_ip
@@ -155,3 +164,4 @@ resource "aws_lb_target_group_attachment" "fgtvm2" {
   target_group_arn = aws_lb_target_group.fortigates.arn
   target_id        = aws_network_interface.fg2_eth1.private_ip
 }
+
